@@ -1,7 +1,5 @@
 package com.myweb;
 
-import com.myweb.drivers.Db;
-
 /**
  * @Description 应用基础类，初始化应用，获取应用公共对象
  * @auther Administrator

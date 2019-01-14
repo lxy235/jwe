@@ -1,14 +1,15 @@
 package com.myweb.drivers.mysql;
 
+import com.myweb.drivers.DbDriver;
 import com.myweb.utils.Config;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class Mysql {
+public class Mysql extends DbDriver {
     Config config = null;
-    Connection conn = null;
+    Connection connection = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
     public Mysql() {
         config = new Config("db.properties");
     }
@@ -20,36 +21,28 @@ public class Mysql {
             e.printStackTrace();
         }
         try {
-            if(null==conn) {
+            if(null==connection) {
                 String user = config.getAttribute("user");
                 String passwd = config.getAttribute("passwd");
                 String host = config.getAttribute("host");
                 String port = config.getAttribute("port");
                 String db = config.getAttribute("db");
                 String dsn = "jdbc:mysql://"+host+":"+port+"/"+db+"";
-                Connection conn = DriverManager.getConnection(dsn,user, passwd);
+                connection = DriverManager.getConnection(dsn,user, passwd);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return conn;
+        return connection;
     }
-    public void Query(String tableName, String sql) {
-
-    }
-    public void Update(String tableName, String fields, String values) {
-
-    }
-    public void Delete(String tableName, String id) {
-
-    }
-    public void execute(String tableName, String sql) {
-
-    }
-    public void commit(String tableName) {
-
-    }
-    public void rollback(String tableName) {
-
+    public ResultSet fetchAll(String fields, String tableName, String where) {
+        String sql = "select "+fields+" from `"+tableName+"` where "+where;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 }
