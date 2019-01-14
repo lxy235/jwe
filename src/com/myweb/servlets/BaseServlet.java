@@ -1,5 +1,8 @@
 package com.myweb.servlets;
 
+import com.myweb.App;
+import com.myweb.View;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -7,6 +10,14 @@ import java.io.UnsupportedEncodingException;
 
 @WebServlet(name = "BaseServlet")
 public class BaseServlet extends HttpServlet {
+    public View view = null;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.view = App.getView();
+    }
+
     public Cookie setCookie(String key, String val, int age, String path) {
         Cookie cookieData = new Cookie(key, val);
         if(0 != age) {

@@ -9,13 +9,17 @@ import com.myweb.drivers.Db;
  */
 public class App {
     public static Db db = null;
+    public static View view = null;
     public static Db getDb() {
         if(null==db) {
             return new Db();
         }
         return db;
     }
-    public static void getView() {
-
+    public static View getView() {
+        if(null==view) {
+            return new View();
+        }
+        return view;
     }
 }
