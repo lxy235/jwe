@@ -17,7 +17,8 @@ public class Db {
         switch (driver) {
             case "mysql":
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
+                    String driverclass = config.getAttribute("driverclass");
+                    Class.forName(driverclass);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -36,5 +37,23 @@ public class Db {
                 }
         }
         return conn;
+    }
+    public void Query(String tableName, String sql) {
+
+    }
+    public void Update(String tableName, String fields, String values) {
+
+    }
+    public void Delete(String tableName, String id) {
+
+    }
+    public void execute(String tableName, String sql) {
+
+    }
+    public void commit(String tableName) {
+
+    }
+    public void rollback(String tableName) {
+
     }
 }
