@@ -1,7 +1,7 @@
 package com.myweb.drivers;
 
-public class DbDriver {
-    public void test() {
-        System.out.println("aaaa");
-    }
+import java.sql.ResultSet;
+
+public interface DbDriver {
+    public ResultSet fetchAll(String fields, String tableName, String where);
 }

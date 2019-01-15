@@ -61,16 +61,16 @@ public class Model {
         dbDriver = db.getDbDriver();
     }
 
-//    /**
-//     * 获取指定条件的数据
-//     *
-//     * @param fields
-//     * @param where
-//     * @return
-//     */
-//    public ResultSet fetchAll(String fields, String where) {
-//
-//    }
+    /**
+     * 获取指定条件的数据
+     *
+     * @param fields
+     * @param where
+     * @return
+     */
+    public ResultSet fetchAll(String fields, String where) {
+        return dbDriver.fetchAll(fields, getTableName(), where);
+    }
 
 //    /**
 //     * 删除操作

@@ -5,7 +5,7 @@ import com.myweb.utils.Config;
 
 import java.sql.*;
 
-public class Mysql extends DbDriver {
+public class Mysql implements DbDriver {
     Config config = null;
     Connection connection = null;
     PreparedStatement ps = null;
@@ -35,6 +35,7 @@ public class Mysql extends DbDriver {
         }
         return connection;
     }
+    @Override
     public ResultSet fetchAll(String fields, String tableName, String where) {
         String sql = "select "+fields+" from `"+tableName+"` where "+where;
         try {
