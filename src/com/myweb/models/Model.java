@@ -72,55 +72,63 @@ public class Model {
         return dbDriver.fetchAll(fields, getTableName(), where);
     }
 
-//    /**
-//     * 删除操作
-//     *
-//     * @param where 查询条件
-//     * @return 成功返回删除记录数，失败返回false
-//     */
-//    public Object Delete(String where) {
-//        return dbDriver.Delete(tableName, where);
-//    }
-//
-//    /**
-//     * 删除操作
-//     *
-//     * @param id 主键id
-//     * @return 成功返回删除记录数，失败返回false
-//     */
-//    public Object Delete(int id) {
-//        return dbDriver.Delete(tableName, primaryId, id);
-//    }
-//
-//    /**
-//     * 插入数据
-//     *
-//     * @param values
-//     * @return 成功true，失败false
-//     */
-//    public boolean insert(HashMap<String, Object> values) {
-//        return dbDriver.Insert(tableName, values);
-//    }
-//
-//    /**
-//     * 更新数据
-//     *
-//     * @param id 主键id
-//     * @param sets 更新字段
-//     * @return 成功返回更新记录数，失败返回false
-//     */
-//    public Object update(int id, HashMap<String, Object> sets) {
-//        return dbDriver.Update(tableName, primaryId, id, sets);
-//    }
-//
-//    /**
-//     * 更新数据
-//     *
-//     * @param where 更新条件
-//     * @param sets 更新字段
-//     * @return 成功返回更新记录数，失败返回false
-//     */
-//    public Object update(String where, HashMap<String, Object> sets) {
-//        return dbDriver.Update(tableName, where, sets);
-//    }
+    /**
+     * 获取单条记录
+     * @param fields
+     * @param id
+     * @return
+     */
+    public ResultSet fetchOne(String fields, int id) {
+        return dbDriver.fetchOne(fields,getTableName(),getPrimaryId(),id);
+    }
+
+    /**
+     * 插入数据
+     * @param fields
+     * @param values
+     * @return
+     */
+    public boolean insert(String fields, String values) {
+        return dbDriver.insert(getTableName(),fields,values);
+    }
+
+    /**
+     * 删除操作
+     *
+     * @param where 查询条件
+     * @return 成功返回删除记录数，失败返回false
+     */
+    public Object delete(String where) {
+        return dbDriver.delete(getTableName(),where);
+    }
+
+    /**
+     * 删除操作
+     *
+     * @param id 主键id
+     * @return 成功返回删除记录数，失败返回false
+     */
+    public Object delete(int id) {
+        return dbDriver.delete(getTableName(),getPrimaryId(),id);
+    }
+
+    /**
+     * 更新数据
+     * @param sets
+     * @param where
+     * @return
+     */
+    public Object update(String sets, String where) {
+        return dbDriver.update(getTableName(),sets,where);
+    }
+
+    /**
+     * 根据ID更新数据
+     * @param sets
+     * @param id
+     * @return
+     */
+    public Object update(String sets, Integer id) {
+        return dbDriver.update(getTableName(), sets, getPrimaryId(), id);
+    }
 }
