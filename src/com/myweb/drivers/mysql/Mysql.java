@@ -101,9 +101,9 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public Boolean insert(String tableName, ArrayList<String> fields, ArrayList<Object> values) {
-        String fieldstr = StringUtils.join(fields,",");
-        String valuestr = StringUtils.join(values,",");
+    public Boolean insert(String tableName, RowSet rowset) {
+        String fieldstr = rowset.getFields();
+        String valuestr = rowset.getValues();
         String sql = "insert into `" + tableName + "` (" + fieldstr + ") values (" + valuestr + ")";
         try {
             ps = getConnection().prepareStatement(sql);

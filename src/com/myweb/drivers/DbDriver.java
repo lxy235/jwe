@@ -1,5 +1,7 @@
 package com.myweb.drivers;
 
+import com.myweb.drivers.mysql.RowSet;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +13,7 @@ public interface DbDriver {
 
     HashMap<String, Object> fetchOne(String fields, String tableName, String where);
 
-    Boolean insert(String tableName, ArrayList<String> fields, ArrayList<Object> values);
+    Boolean insert(String tableName, RowSet rowset);
 
     Object update(String tableName, String sets, String where);
 

@@ -3,6 +3,7 @@ package com.myweb.models;
 import com.myweb.App;
 import com.myweb.Db;
 import com.myweb.drivers.DbDriver;
+import com.myweb.drivers.mysql.RowSet;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -99,12 +100,11 @@ public class Model {
     /**
      * 插入数据
      *
-     * @param fields
-     * @param values
+     * @param rowset
      * @return
      */
-    public boolean insert(ArrayList<String> fields, ArrayList<Object> values) {
-        return dbDriver.insert(getTableName(), fields, values);
+    public boolean insert(RowSet rowset) {
+        return dbDriver.insert(getTableName(), rowset);
     }
 
     /**
