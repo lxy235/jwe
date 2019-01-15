@@ -2,6 +2,7 @@ package com.myweb.drivers.mysql;
 
 import com.myweb.drivers.DbDriver;
 import com.myweb.utils.Config;
+import com.sun.deploy.util.StringUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class Mysql implements DbDriver {
 
     @Override
     public ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, String where) {
+        if(null==fields) {
+            fields = "*";
+        }
         String sql = "select " + fields + " from `" + tableName + "` where " + where;
         ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> row = new HashMap<String, Object>();
@@ -50,7 +54,7 @@ public class Mysql implements DbDriver {
             rs = ps.executeQuery();
             ArrayList<String> columnNames = _getColumnNames(rs);
             while (rs.next()) {
-                for (String columnName:columnNames
+                for (String columnName : columnNames
                 ) {
                     row.put(columnName, rs.getObject(columnName));
                 }
@@ -64,6 +68,9 @@ public class Mysql implements DbDriver {
 
     @Override
     public HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id) {
+        if(null==fields) {
+            fields = "*";
+        }
         String sql = "select " + fields + " from `" + tableName + "` where " + primaryId + " = " + id;
         HashMap<String, Object> info = null;
         try {
@@ -78,6 +85,9 @@ public class Mysql implements DbDriver {
 
     @Override
     public HashMap<String, Object> fetchOne(String fields, String tableName, String where) {
+        if(null==fields) {
+            fields = "*";
+        }
         String sql = "select " + fields + " from `" + tableName + "` where " + where;
         HashMap<String, Object> info = null;
         try {
@@ -91,8 +101,10 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public Boolean insert(String tableName, String fields, String values) {
-        String sql = "insert into `" + tableName + "` (" + fields + ") values (" + values + ")";
+    public Boolean insert(String tableName, ArrayList<String> fields, ArrayList<Object> values) {
+        String fieldstr = StringUtils.join(fields,",");
+        String valuestr = StringUtils.join(values,",");
+        String sql = "insert into `" + tableName + "` (" + fieldstr + ") values (" + valuestr + ")";
         try {
             ps = getConnection().prepareStatement(sql);
             ps.executeUpdate();
@@ -211,6 +223,7 @@ public class Mysql implements DbDriver {
 
     /**
      * 获取数据列
+     *
      * @param rs
      * @return
      */
@@ -219,7 +232,7 @@ public class Mysql implements DbDriver {
         ArrayList<String> columnNames = new ArrayList<String>();
         try {
             columnCount = rs.getMetaData().getColumnCount();
-            for (int i=1; i<=columnCount; i++) {
+            for (int i = 1; i <= columnCount; i++) {
                 columnNames.add(rs.getMetaData().getColumnName(i));
             }
         } catch (SQLException e) {
@@ -230,6 +243,7 @@ public class Mysql implements DbDriver {
 
     /**
      * 获取单行数据
+     *
      * @param rs
      * @return
      */
@@ -238,7 +252,7 @@ public class Mysql implements DbDriver {
         try {
             ArrayList<String> columnNames = _getColumnNames(rs);
             while (rs.next()) {
-                for (String columnName:columnNames
+                for (String columnName : columnNames
                 ) {
                     info.put(columnName, rs.getObject(columnName));
                 }

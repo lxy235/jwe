@@ -103,7 +103,7 @@ public class Model {
      * @param values
      * @return
      */
-    public boolean insert(String fields, String values) {
+    public boolean insert(ArrayList<String> fields, ArrayList<Object> values) {
         return dbDriver.insert(getTableName(), fields, values);
     }
 
