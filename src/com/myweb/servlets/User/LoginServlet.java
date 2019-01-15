@@ -15,9 +15,9 @@ public class LoginServlet extends BaseServlet {
         setCharset(request, response);
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if(username.equals("admin") && password.equals("123456")) {
+        if (username.equals("admin") && password.equals("123456")) {
             //设置用户cookie，3天内自动登录
-            response.addCookie(setCookie("username", username, 3*24*3600, "/login"));
+            response.addCookie(setCookie("username", username, 3 * 24 * 3600, "/login"));
             //设置session
             request.getSession().setAttribute("username", username);
             response.sendRedirect("/index");
@@ -31,13 +31,13 @@ public class LoginServlet extends BaseServlet {
         setCharset(request, response);
         Cookie[] cks = request.getCookies();
         String username = "";
-        for(Cookie c:cks) {
-            if("username".equals(c.getName())) {
+        for (Cookie c : cks) {
+            if ("username".equals(c.getName())) {
                 username = c.getValue();
                 request.getSession().setAttribute("username", username);
             }
         }
-        if("".equals(username)) {
+        if ("".equals(username)) {
             request.getRequestDispatcher("/user/login.jsp").forward(request, response);
         } else {
             response.sendRedirect("/index");

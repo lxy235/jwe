@@ -20,14 +20,15 @@ public class BaseServlet extends HttpServlet {
 
     public Cookie setCookie(String key, String val, int age, String path) {
         Cookie cookieData = new Cookie(key, val);
-        if(0 != age) {
+        if (0 != age) {
             cookieData.setMaxAge(age);
         }
-        if(null != path) {
+        if (null != path) {
             cookieData.setPath(path);
         }
         return cookieData;
     }
+
     public void setCharset(HttpServletRequest request, HttpServletResponse response) {
         //设置请求编码格式
         try {
@@ -38,6 +39,7 @@ public class BaseServlet extends HttpServlet {
         //设置相应编码格式
         response.setContentType("text/html;charset=utf-8");
     }
+
     public void dd(Object value) {
         System.out.println(value);
     }

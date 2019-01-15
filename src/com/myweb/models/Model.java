@@ -74,22 +74,24 @@ public class Model {
 
     /**
      * 获取单条记录
+     *
      * @param fields
      * @param id
      * @return
      */
     public ResultSet fetchOne(String fields, int id) {
-        return dbDriver.fetchOne(fields,getTableName(),getPrimaryId(),id);
+        return dbDriver.fetchOne(fields, getTableName(), getPrimaryId(), id);
     }
 
     /**
      * 插入数据
+     *
      * @param fields
      * @param values
      * @return
      */
     public boolean insert(String fields, String values) {
-        return dbDriver.insert(getTableName(),fields,values);
+        return dbDriver.insert(getTableName(), fields, values);
     }
 
     /**
@@ -99,7 +101,7 @@ public class Model {
      * @return 成功返回删除记录数，失败返回false
      */
     public Object delete(String where) {
-        return dbDriver.delete(getTableName(),where);
+        return dbDriver.delete(getTableName(), where);
     }
 
     /**
@@ -109,21 +111,23 @@ public class Model {
      * @return 成功返回删除记录数，失败返回false
      */
     public Object delete(int id) {
-        return dbDriver.delete(getTableName(),getPrimaryId(),id);
+        return dbDriver.delete(getTableName(), getPrimaryId(), id);
     }
 
     /**
      * 更新数据
+     *
      * @param sets
      * @param where
      * @return
      */
     public Object update(String sets, String where) {
-        return dbDriver.update(getTableName(),sets,where);
+        return dbDriver.update(getTableName(), sets, where);
     }
 
     /**
      * 根据ID更新数据
+     *
      * @param sets
      * @param id
      * @return

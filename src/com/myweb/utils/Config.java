@@ -9,11 +9,12 @@ public class Config {
     private String path = "";
     private Properties pro = null;
     private FileInputStream file = null;
+
     public Config(String filename) {
-        path = System.getProperty("user.dir")+"/conf/";
+        path = System.getProperty("user.dir") + "/conf/";
         pro = new Properties();
         try {
-            filename = path+filename;
+            filename = path + filename;
             file = new FileInputStream(filename);
             try {
                 pro.load(file);
@@ -24,6 +25,7 @@ public class Config {
             e.printStackTrace();
         }
     }
+
     public String getAttribute(String key) {
         return pro.getProperty(key);
     }

@@ -12,6 +12,7 @@ import java.io.IOException;
 public class IndexServlet extends BaseServlet {
     /**
      * 项目主页
+     *
      * @param request
      * @param response
      * @throws ServletException
@@ -30,7 +31,7 @@ public class IndexServlet extends BaseServlet {
         //
         sc.getRealPath("/doc/1.txt");
         String username = (String) request.getSession().getAttribute("username");
-        if(null==username) {
+        if (null == username) {
             response.sendRedirect("/login");
         } else {
             request.getRequestDispatcher("/index.jsp").forward(request, response);

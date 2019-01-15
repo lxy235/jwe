@@ -8,14 +8,16 @@ package com.myweb;
 public class App {
     public static Db db = null;
     public static View view = null;
+
     public static Db getDb() {
-        if(null==db) {
+        if (null == db) {
             return new Db();
         }
         return db;
     }
+
     public static View getView() {
-        if(null==view) {
+        if (null == view) {
             return new View();
         }
         return view;
