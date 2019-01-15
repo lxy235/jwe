@@ -4,6 +4,8 @@ import com.myweb.drivers.DbDriver;
 import com.myweb.utils.Config;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Mysql implements DbDriver {
     Config config = null;
@@ -51,15 +53,17 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public ResultSet fetchOne(String fields, String tableName, String primaryId, Integer id) {
+    public HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id) {
         String sql = "select " + fields + " from `" + tableName + "` where " + primaryId + " = " + id;
-        try {
-            ps = getConnection().prepareStatement(sql);
-            rs = ps.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
+        HashMap<String, Object> userinfo = _getOneData(sql);
+        return userinfo;
+    }
+
+    @Override
+    public HashMap<String, Object> fetchOne(String fields, String tableName, String where) {
+        String sql = "select " + fields + " from `" + tableName + "` where " + where;
+        HashMap<String, Object> userinfo = _getOneData(sql);
+        return userinfo;
     }
 
     @Override
@@ -179,5 +183,47 @@ public class Mysql implements DbDriver {
     @Override
     public Integer getLastId() {
         return null;
+    }
+
+    /**
+     * 获取数据列
+     * @param rs
+     * @return
+     */
+    private ArrayList<String> _getColumnNames(ResultSet rs) {
+        Integer columnCount = null;
+        ArrayList<String> columnNames = new ArrayList<String>();
+        try {
+            columnCount = rs.getMetaData().getColumnCount();
+            for (int i=1; i<=columnCount; i++) {
+                columnNames.add(rs.getMetaData().getColumnName(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return columnNames;
+    }
+
+    /**
+     * 获取单行数据
+     * @param sql
+     * @return
+     */
+    private HashMap<String, Object> _getOneData(String sql) {
+        HashMap<String, Object> userinfo = new HashMap<String, Object>();
+        try {
+            ps = getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            ArrayList<String> columnNames = _getColumnNames(rs);
+            while (rs.next()) {
+                for (String columnName:columnNames
+                ) {
+                    userinfo.put(columnName, rs.getObject(columnName));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userinfo;
     }
 }

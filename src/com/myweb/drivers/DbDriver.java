@@ -1,11 +1,14 @@
 package com.myweb.drivers;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 public interface DbDriver {
     ResultSet fetchAll(String fields, String tableName, String where);
 
-    ResultSet fetchOne(String fields, String tableName, String primaryId, Integer id);
+    HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id);
+
+    HashMap<String, Object> fetchOne(String fields, String tableName, String where);
 
     Boolean insert(String tableName, String fields, String values);
 

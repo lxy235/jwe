@@ -6,6 +6,7 @@ import com.myweb.drivers.DbDriver;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 public class Model {
     /**
@@ -79,8 +80,19 @@ public class Model {
      * @param id
      * @return
      */
-    public ResultSet fetchOne(String fields, int id) {
+    public HashMap<String, Object> fetchOne(String fields, int id) {
         return dbDriver.fetchOne(fields, getTableName(), getPrimaryId(), id);
+    }
+
+    /**
+     * 获取单条记录
+     *
+     * @param fields
+     * @param where
+     * @return
+     */
+    public HashMap<String, Object> fetchOne(String fields, String where) {
+        return dbDriver.fetchOne(fields, getTableName(), where);
     }
 
     /**
