@@ -1,10 +1,11 @@
 package com.myweb.drivers;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface DbDriver {
-    ResultSet fetchAll(String fields, String tableName, String where);
+    ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, String where);
 
     HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id);
 

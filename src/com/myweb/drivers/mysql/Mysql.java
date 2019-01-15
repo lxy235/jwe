@@ -41,29 +41,53 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public ResultSet fetchAll(String fields, String tableName, String where) {
+    public ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, String where) {
         String sql = "select " + fields + " from `" + tableName + "` where " + where;
+        ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
+        HashMap<String, Object> row = new HashMap<String, Object>();
         try {
             ps = getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
+            ArrayList<String> columnNames = _getColumnNames(rs);
+            while (rs.next()) {
+                for (String columnName:columnNames
+                ) {
+                    row.put(columnName, rs.getObject(columnName));
+                }
+                rows.add(row);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rs;
+        return rows;
     }
 
     @Override
     public HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id) {
         String sql = "select " + fields + " from `" + tableName + "` where " + primaryId + " = " + id;
-        HashMap<String, Object> userinfo = _getOneData(sql);
-        return userinfo;
+        HashMap<String, Object> info = null;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            info = _getOneData(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return info;
     }
 
     @Override
     public HashMap<String, Object> fetchOne(String fields, String tableName, String where) {
         String sql = "select " + fields + " from `" + tableName + "` where " + where;
-        HashMap<String, Object> userinfo = _getOneData(sql);
-        return userinfo;
+        HashMap<String, Object> info = null;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            info = _getOneData(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return info;
     }
 
     @Override
@@ -206,24 +230,22 @@ public class Mysql implements DbDriver {
 
     /**
      * 获取单行数据
-     * @param sql
+     * @param rs
      * @return
      */
-    private HashMap<String, Object> _getOneData(String sql) {
-        HashMap<String, Object> userinfo = new HashMap<String, Object>();
+    private HashMap<String, Object> _getOneData(ResultSet rs) {
+        HashMap<String, Object> info = new HashMap<String, Object>();
         try {
-            ps = getConnection().prepareStatement(sql);
-            rs = ps.executeQuery();
             ArrayList<String> columnNames = _getColumnNames(rs);
             while (rs.next()) {
                 for (String columnName:columnNames
                 ) {
-                    userinfo.put(columnName, rs.getObject(columnName));
+                    info.put(columnName, rs.getObject(columnName));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return userinfo;
+        return info;
     }
 }

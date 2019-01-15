@@ -6,6 +6,7 @@ import com.myweb.drivers.DbDriver;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Model {
@@ -69,7 +70,7 @@ public class Model {
      * @param where
      * @return
      */
-    public ResultSet fetchAll(String fields, String where) {
+    public ArrayList<HashMap<String, Object>> fetchAll(String fields, String where) {
         return dbDriver.fetchAll(fields, getTableName(), where);
     }
 
