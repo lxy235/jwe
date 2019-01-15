@@ -1,6 +1,7 @@
 package com.myweb.drivers;
 
 import com.myweb.drivers.mysql.RowSet;
+import com.myweb.drivers.mysql.Statement;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.HashMap;
 
 public interface DbDriver {
     ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, String where);
+
+    ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, Statement statement);
 
     HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id);
 

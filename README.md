@@ -1,4 +1,4 @@
-# 数据模型使用
+# 使用数据模型
 
 ```java
 UserModel user = new UserModel();
@@ -13,11 +13,20 @@ HashMap<String, Object> userinfo = user.fetchOne("id,name", 2);
 System.out.println(userinfo);
 System.out.println(userinfo.isEmpty());
 
-#获取全部数据
+#获取全部记录
 ArrayList<HashMap<String, Object>> list = user.fetchAll("id,name", "id>13705 and id<13710");
 System.out.println(list);
 System.out.println(list.isEmpty());
 
+#获取全部记录（对象方式，防sql注入，推荐）
+Statement statement = new Statement();
+statement.setWhere("id > ? and id < ?");
+statement.setParam(1, 13705);
+statement.setParam(2, "13709 or 1=1");
+ArrayList<HashMap<String, Object>> list = user.fetchAll("id,name", statement);
+System.out.println(list);
+System.out.println(list.isEmpty());
+        
 #插入数据
 RowSet insData = new RowSet();
 insData.addString("name", "lxy");

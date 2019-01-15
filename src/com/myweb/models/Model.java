@@ -4,6 +4,7 @@ import com.myweb.App;
 import com.myweb.Db;
 import com.myweb.drivers.DbDriver;
 import com.myweb.drivers.mysql.RowSet;
+import com.myweb.drivers.mysql.Statement;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -73,6 +74,17 @@ public class Model {
      */
     public ArrayList<HashMap<String, Object>> fetchAll(String fields, String where) {
         return dbDriver.fetchAll(fields, getTableName(), where);
+    }
+
+    /**
+     * 获取指定条件的数据
+     *
+     * @param fields
+     * @param statement
+     * @return
+     */
+    public ArrayList<HashMap<String, Object>> fetchAll(String fields, Statement statement) {
+        return dbDriver.fetchAll(fields, getTableName(), statement);
     }
 
     /**

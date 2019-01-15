@@ -48,12 +48,43 @@ public class Mysql implements DbDriver {
         }
         String sql = "select " + fields + " from `" + tableName + "` where " + where;
         ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
-        HashMap<String, Object> row = new HashMap<String, Object>();
         try {
             ps = getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
             ArrayList<String> columnNames = _getColumnNames(rs);
             while (rs.next()) {
+                HashMap<String, Object> row = new HashMap<String, Object>();
+                for (String columnName : columnNames
+                ) {
+                    row.put(columnName, rs.getObject(columnName));
+                }
+                rows.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rows;
+    }
+
+    @Override
+    public ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, Statement statement) {
+        if(null==fields) {
+            fields = "*";
+        }
+        String where = statement.getWhere();
+        String sql = "select " + fields + " from `" + tableName + "` where " + where;
+        ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
+        try {
+            ps = getConnection().prepareStatement(sql);
+            HashMap<Integer, Object> params = statement.getParams();
+            for(Integer index:params.keySet())
+            {
+                ps.setObject(index, params.get(index));
+            }
+            rs = ps.executeQuery();
+            ArrayList<String> columnNames = _getColumnNames(rs);
+            while (rs.next()) {
+                HashMap<String, Object> row = new HashMap<String, Object>();
                 for (String columnName : columnNames
                 ) {
                     row.put(columnName, rs.getObject(columnName));
