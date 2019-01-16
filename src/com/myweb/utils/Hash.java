@@ -11,6 +11,7 @@ import sun.misc.*;
 public class Hash {
     /**
      * 生成32位md5码
+     *
      * @param password
      * @return
      */
@@ -26,7 +27,8 @@ public class Hash {
                 String str = Integer.toHexString(number);
                 if (str.length() == 1) {
                     buffer.append("0");
-                } buffer.append(str);
+                }
+                buffer.append(str);
             }
             //标准的md5加密后的结果
             return buffer.toString();
@@ -39,6 +41,7 @@ public class Hash {
 
     /**
      * base64加密
+     *
      * @param password
      * @return
      */
@@ -58,6 +61,7 @@ public class Hash {
 
     /**
      * base64解密
+     *
      * @param password
      * @return
      */
