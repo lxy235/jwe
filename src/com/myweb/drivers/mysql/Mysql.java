@@ -261,7 +261,7 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public void startTransaction() {
+    public void beginTransaction() {
         try {
             getConnection().setAutoCommit(false);
         } catch (SQLException e) {
@@ -270,7 +270,7 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public void endTransaction() {
+    public void commit() {
         try {
             getConnection().commit();
         } catch (SQLException e) {

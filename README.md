@@ -95,9 +95,9 @@ db.execute("insert into `t_user` (`name`, `pass`) values ('admin','123456')");
 # 使用事务
 ```java
 try {
-    db.startTransaction(); //开始事务
+    db.beginTransaction(); //开始事务
     ......
-    db.endTransaction(); //提交事务
+    db.commit(); //提交事务
 } catch (Exception e) {
     db.rollback(); //事务回滚
 }

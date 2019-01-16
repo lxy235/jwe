@@ -34,9 +34,9 @@ public interface DbDriver {
 
     Object execute(String sql);
 
-    void startTransaction();
+    void beginTransaction();
 
-    void endTransaction();
+    void commit();
 
     void rollback();
 
