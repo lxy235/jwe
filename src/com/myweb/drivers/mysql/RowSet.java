@@ -119,7 +119,7 @@ public class RowSet {
      * @param fieldName
      * @param fieldValue
      */
-    public void addText(String fieldName, String fieldValue) {
+    protected void addText(String fieldName, String fieldValue) {
         if (null != fieldName && null != fieldValue) {
             fields.add('`' + fieldName + '`');
             BufferedReader fieldClob = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(fieldValue.getBytes())));
