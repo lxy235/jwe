@@ -1,3 +1,15 @@
+# 目录说明
+```text
+drivers/ 数据驱动，包括db和缓存驱动
+models/ 数据模型，以数据表为单位
+services/ 业务逻辑层
+servlets/ 控制器层
+utils/ 常用工具类
+App 应用类，负责应用的初始化和调度
+Db 数据层的门脸类
+View 视图层的门脸类
+```
+
 # 使用数据模型
 
 ```java
@@ -37,5 +49,18 @@ user.insert(insData);
 
 # 使用原生SQL
 ```java
+DbDriver db = App.getDb().getDbDriver();
+db.query("select * from `t_user`");
+db.execute("insert into `t_user` (`name`, `pass`) values ('admin','123456')");
+```
 
+# 使用事务
+```java
+try {
+    db.startTransaction(); //开始事务
+    ......
+    db.endTransaction(); //提交事务
+} catch (Exception e) {
+    db.rollback(); //事务回滚
+}
 ```
