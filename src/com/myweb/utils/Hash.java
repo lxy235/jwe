@@ -15,7 +15,7 @@ public class Hash {
      * @param password
      * @return
      */
-    public static String md5Password(String password) {
+    public static String md5(String password) {
         try {
             //得到一个信息摘要器
             MessageDigest digest = MessageDigest.getInstance("md5");
@@ -38,14 +38,13 @@ public class Hash {
         }
     }
 
-
     /**
      * base64加密
      *
      * @param password
      * @return
      */
-    public static String getBase64(String password) {
+    public static String toBase64(String password) {
         byte[] b = null;
         String s = null;
         try {
@@ -65,7 +64,7 @@ public class Hash {
      * @param password
      * @return
      */
-    public static String getFromBase64(String password) {
+    public static String fromBase64(String password) {
         byte[] b = null;
         String result = null;
         if (password != null) {

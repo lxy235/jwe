@@ -1,3 +1,5 @@
+[TOC]
+
 # 目录说明
 ```text
 drivers/ 数据驱动，包括db和缓存驱动
@@ -38,7 +40,7 @@ statement.setParam(2, "13709 or 1=1");
 ArrayList<HashMap<String, Object>> list = user.fetchAll("id,name", statement);
 System.out.println(list);
 System.out.println(list.isEmpty());
-        
+
 #插入数据
 RowSet insData = new RowSet();
 insData.addString("name", "lxy");
@@ -46,19 +48,15 @@ insData.addString("sex", "M");
 insData.addNumber("age", 35);
 user.insert(insData);
 
-
-
 #更新数据(根据where条件更新数据)
 String sets = "uname='test', pwd='123'";
 String where = "id>13705 and id<13710";
 Integer num = user.update(sets, where);
 
-
 #更新数据(根据主键更新数据)
 String sets = "uname='test', pwd='123'";
 Integer id = 13705;
 Integer num = user.update(sets, id);
-
 
 #更新数据
 RowSet upData = new RowSet();
@@ -85,7 +83,6 @@ statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
 Integer num = user.delete(statement);
-
 ```
 
 # 使用原生SQL
