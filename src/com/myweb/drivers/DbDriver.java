@@ -22,9 +22,13 @@ public interface DbDriver {
 
     Object update(String tableName, String sets, String primaryId, Integer id);
 
+    Object update(String tableName, RowSet rowset, Statement statement);
+
     Object delete(String tableName, String where);
 
     Object delete(String tableName, String primaryId, Integer id);
+
+    Object delete(String tableName, Statement statement);
 
     Object query(String sql);
 

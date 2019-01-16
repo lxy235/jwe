@@ -172,6 +172,27 @@ public class Mysql implements DbDriver {
     }
 
     @Override
+    public Object update(String tableName, RowSet rowset, Statement statement){
+        String where = statement.getWhere();
+        String sets = rowset.getSets();
+        String sql = "update `" + tableName + "` set " + sets + " where " + where + "";
+        Integer nums = 0;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            HashMap<Integer, Object> params = statement.getParams();
+            for(Integer index:params.keySet())
+            {
+                ps.setObject(index, params.get(index));
+            }
+            nums = ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return nums;
+    }
+
+
+    @Override
     public Object delete(String tableName, String where) {
         String sql = "delete from `" + tableName + "` where " + where;
         Integer nums = 0;
@@ -190,6 +211,25 @@ public class Mysql implements DbDriver {
         Integer nums = 0;
         try {
             ps = getConnection().prepareStatement(sql);
+            nums = ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return nums;
+    }
+
+    @Override
+    public Object delete(String tableName, Statement statement){
+        String where = statement.getWhere();
+        String sql = "delete from `" + tableName + "` where " + where;
+        Integer nums = 0;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            HashMap<Integer, Object> params = statement.getParams();
+            for(Integer index:params.keySet())
+            {
+                ps.setObject(index, params.get(index));
+            }
             nums = ps.executeUpdate();
         } catch (SQLException e) {
             return false;

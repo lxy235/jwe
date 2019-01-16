@@ -140,6 +140,16 @@ public class Model {
     }
 
     /**
+     * 删除操作
+     *
+     * @param statement 查询条件
+     * @return 成功返回删除记录数，失败返回false
+     */
+    public Object delete(Statement statement) {
+        return dbDriver.delete(getTableName(), statement);
+    }
+
+    /**
      * 更新数据
      *
      * @param sets
@@ -159,5 +169,16 @@ public class Model {
      */
     public Object update(String sets, Integer id) {
         return dbDriver.update(getTableName(), sets, getPrimaryId(), id);
+    }
+
+    /**
+     * 更新数据
+     *
+     * @param sets
+     * @param statement
+     * @return
+     */
+    public Object update(RowSet sets, Statement statement) {
+        return dbDriver.update(getTableName(), sets, statement);
     }
 }
