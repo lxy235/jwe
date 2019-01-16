@@ -1,3 +1,15 @@
+# 目录说明
+```text
+drivers/ 数据驱动，包括db和缓存驱动
+models/ 数据模型，以数据表为单位
+services/ 业务逻辑层
+servlets/ 控制器层
+utils/ 常用工具类
+App 应用类，负责应用的初始化和调度
+Db 数据层的门脸类
+View 视图层的门脸类
+```
+
 # 使用数据模型
 
 ```java
