@@ -45,6 +45,47 @@ insData.addString("name", "lxy");
 insData.addString("sex", "M");
 insData.addNumber("age", 35);
 user.insert(insData);
+
+
+
+#更新数据(根据where条件更新数据)
+String sets = "uname='test', pwd='123'";
+String where = "id>13705 and id<13710";
+Integer num = user.update(sets, where);
+
+
+#更新数据(根据主键更新数据)
+String sets = "uname='test', pwd='123'";
+Integer id = 13705;
+Integer num = user.update(sets, id);
+
+
+#更新数据
+RowSet upData = new RowSet();
+upData.addSet("uname", "123");
+upData.addSet("pwd", "234");
+//statement参数使用对象方式，防sql注入，推荐
+Statement statement = new Statement();
+statement.setWhere("id > ? and id < ?");
+statement.setParam(1, 13705);
+statement.setParam(2, "13709 or 1=1");
+Integer num = user.update(upData, statement);
+
+#删除数据(根据where条件删除数据)
+String where = "id>13705 and id<13710";
+Integer num = user.delete(where);
+
+#删除数据(根据主键删除数据)
+int id = 13705;
+Integer num = user.delete(id);
+
+#删除数据（Statement statement）
+Statement statement = new Statement();
+statement.setWhere("id > ? and id < ?");
+statement.setParam(1, 13705);
+statement.setParam(2, "13709 or 1=1");
+Integer num = user.delete(statement);
+
 ```
 
 # 使用原生SQL
