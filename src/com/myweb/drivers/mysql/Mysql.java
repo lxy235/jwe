@@ -114,6 +114,29 @@ public class Mysql implements DbDriver {
     }
 
     @Override
+    public HashMap<String, Object> fetchOne(String fields, String tableName, Statement statement) {
+        if(null==fields) {
+            fields = "*";
+        }
+        String where = statement.getWhere();
+        String sql = "select " + fields + " from `" + tableName + "` where " + where;
+        HashMap<String, Object> info = null;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            HashMap<Integer, Object> params = statement.getParams();
+            for(Integer index:params.keySet())
+            {
+                ps.setObject(index, params.get(index));
+            }
+            rs = ps.executeQuery();
+            info = _getOneData(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
+
+    @Override
     public HashMap<String, Object> fetchOne(String fields, String tableName, String where) {
         if(null==fields) {
             fields = "*";

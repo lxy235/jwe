@@ -16,6 +16,8 @@ public interface DbDriver {
 
     HashMap<String, Object> fetchOne(String fields, String tableName, String where);
 
+    HashMap<String, Object> fetchOne(String fields, String tableName, Statement statement);
+
     Boolean insert(String tableName, RowSet rowset);
 
     Object update(String tableName, String sets, String where);
