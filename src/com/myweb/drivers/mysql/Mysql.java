@@ -2,7 +2,6 @@ package com.myweb.drivers.mysql;
 
 import com.myweb.drivers.DbDriver;
 import com.myweb.utils.Config;
-import com.sun.deploy.util.StringUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
