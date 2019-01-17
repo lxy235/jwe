@@ -1,35 +1,42 @@
 package com.myweb.servlets;
 
-import com.myweb.App;
+
 import com.myweb.View;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.UnsupportedEncodingException;
 
 @WebServlet(name = "BaseServlet")
 public class BaseServlet extends HttpServlet {
-    public View view = null;
+    /**
+     * 视图对象
+     */
+    protected View view = null;
 
     @Override
-    public void init() throws ServletException {
-        super.init();
-        this.view = App.getView();
+    public void service(HttpServletRequest req, HttpServletResponse resp) {
+        view = new View(req, resp);
+        _setCharset(req, resp);
+        _service(req, resp);
     }
 
-    public Cookie setCookie(String key, String val, int age, String path) {
-        Cookie cookieData = new Cookie(key, val);
-        if (0 != age) {
-            cookieData.setMaxAge(age);
-        }
-        if (null != path) {
-            cookieData.setPath(path);
-        }
-        return cookieData;
+    /**
+     * 业务逻辑，子类覆盖这个方法
+     *
+     * @param req
+     * @param resp
+     */
+    public void _service(HttpServletRequest req, HttpServletResponse resp) {
     }
 
-    public void setCharset(HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * 设置请求和响应编码
+     *
+     * @param request
+     * @param response
+     */
+    private void _setCharset(HttpServletRequest request, HttpServletResponse response) {
         //设置请求编码格式
         try {
             request.setCharacterEncoding("utf-8");
@@ -40,7 +47,12 @@ public class BaseServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
     }
 
-    public void dd(Object value) {
+    /**
+     * 快捷输出
+     *
+     * @param value
+     */
+    protected void dd(Object value) {
         System.out.println(value);
     }
 }
