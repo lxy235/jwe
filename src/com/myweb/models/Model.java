@@ -110,6 +110,17 @@ public class Model {
     }
 
     /**
+     * 获取单条记录
+     *
+     * @param fields
+     * @param statement
+     * @return
+     */
+    public HashMap<String, Object> fetchOne(String fields, Statement statement) {
+        return dbDriver.fetchOne(fields, getTableName(), statement);
+    }
+
+    /**
      * 插入数据
      *
      * @param rowset
