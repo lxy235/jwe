@@ -36,6 +36,22 @@ HashMap<String, Object> userinfo = user.fetchOne("id,name", statement);
 System.out.println(userinfo);
 System.out.println(userinfo.isEmpty());
 
+#获取一条记录（对象方式，防sql注入，推荐）
+#设置字段
+Field field = new Field();
+String[] fields = {"id","name","age"};
+field.setField(fields);
+field.setField("sex");
+#设置查询条件
+Statement statement = new Statement();
+statement.setWhere("id > ? and id < ?");
+statement.setParam(1, 13705);
+statement.setParam(2, "13709 or 1=1");
+HashMap<String, Object> userinfo = user.fetchOne(field, statement);
+System.out.println(userinfo);
+System.out.println(userinfo.isEmpty());
+
+
 #获取全部记录
 ArrayList<HashMap<String, Object>> list = user.fetchAll("id,name", "id>13705 and id<13710");
 System.out.println(list);
@@ -50,12 +66,29 @@ ArrayList<HashMap<String, Object>> list = user.fetchAll("id,name", statement);
 System.out.println(list);
 System.out.println(list.isEmpty());
 
+#获取全部记录（对象方式，防sql注入，推荐）
+#设置字段
+Field field = new Field();
+String[] fields = {"id","name","age"};
+field.setField(fields);
+field.setField("sex");
+#设置查询条件
+Statement statement = new Statement();
+statement.setWhere("id > ? and id < ?");
+statement.setParam(1, 13705);
+statement.setParam(2, "13709 or 1=1");
+ArrayList<HashMap<String, Object>> list = user.fetchAll(field, statement);
+System.out.println(list);
+System.out.println(list.isEmpty());
+
+
 #插入数据
 RowSet insData = new RowSet();
 insData.addString("name", "lxy");
 insData.addString("sex", "M");
 insData.addNumber("age", 35);
 user.insert(insData);
+
 
 #更新数据(根据where条件更新数据)
 String sets = "uname='test', pwd='123'";
@@ -77,6 +110,7 @@ statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
 Integer num = user.update(upData, statement);
+
 
 #删除数据(根据where条件删除数据)
 String where = "id>13705 and id<13710";

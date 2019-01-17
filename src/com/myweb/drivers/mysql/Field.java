@@ -15,6 +15,9 @@ public class Field {
      * @return
      */
     public String getFields() {
+        if(fields.isEmpty()) {
+            return "*";
+        }
         return StringUtils.join(fields, ",");
     }
 

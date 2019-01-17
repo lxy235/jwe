@@ -34,6 +34,12 @@ public class Mysql implements DbDriver {
                 String dsn = "jdbc:mysql://" + host + ":" + port + "/" + db + "";
                 connection = DriverManager.getConnection(dsn, user, passwd);
             }
+            try {
+                ps = connection.prepareStatement("SET NAMES "+config.getAttribute("mysql.charset"));
+                rs = ps.executeQuery();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,6 +103,35 @@ public class Mysql implements DbDriver {
     }
 
     @Override
+    public ArrayList<HashMap<String, Object>> fetchAll(Field field, String tableName, Statement statement) {
+        String fields = field.getFields();
+        String where = statement.getWhere();
+        String sql = "select " + fields + " from `" + tableName + "` where " + where;
+        ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
+        try {
+            ps = getConnection().prepareStatement(sql);
+            HashMap<Integer, Object> params = statement.getParams();
+            for(Integer index:params.keySet())
+            {
+                ps.setObject(index, params.get(index));
+            }
+            rs = ps.executeQuery();
+            ArrayList<String> columnNames = _getColumnNames(rs);
+            while (rs.next()) {
+                HashMap<String, Object> row = new HashMap<String, Object>();
+                for (String columnName : columnNames
+                ) {
+                    row.put(columnName, rs.getObject(columnName));
+                }
+                rows.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rows;
+    }
+
+    @Override
     public HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id) {
         if(null==fields) {
             fields = "*";
@@ -118,6 +153,27 @@ public class Mysql implements DbDriver {
         if(null==fields) {
             fields = "*";
         }
+        String where = statement.getWhere();
+        String sql = "select " + fields + " from `" + tableName + "` where " + where;
+        HashMap<String, Object> info = null;
+        try {
+            ps = getConnection().prepareStatement(sql);
+            HashMap<Integer, Object> params = statement.getParams();
+            for(Integer index:params.keySet())
+            {
+                ps.setObject(index, params.get(index));
+            }
+            rs = ps.executeQuery();
+            info = _getOneData(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
+
+    @Override
+    public HashMap<String, Object> fetchOne(Field field, String tableName, Statement statement) {
+        String fields = field.getFields();
         String where = statement.getWhere();
         String sql = "select " + fields + " from `" + tableName + "` where " + where;
         HashMap<String, Object> info = null;
