@@ -210,17 +210,22 @@ public class Mysql implements DbDriver {
     }
 
     @Override
-    public Boolean insert(String tableName, RowSet rowset) {
+    public Integer insert(String tableName, RowSet rowset) {
+        Integer nums = 0;
         String fieldstr = rowset.getFields();
         String valuestr = rowset.getValues();
         String sql = "insert into `" + tableName + "` (" + fieldstr + ") values (" + valuestr + ")";
         try {
-            ps = getConnection().prepareStatement(sql);
+            ps = getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                nums = rs.getInt(1);
+            }
         } catch (SQLException e) {
-            return false;
+            return 0;
         }
-        return true;
+        return nums;
     }
 
     @Override

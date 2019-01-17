@@ -22,7 +22,7 @@ public interface DbDriver {
 
     HashMap<String, Object> fetchOne(Field field, String tableName, Statement statement);
 
-    Boolean insert(String tableName, RowSet rowset);
+    Integer insert(String tableName, RowSet rowset);
 
     Object update(String tableName, String sets, String where);
 
