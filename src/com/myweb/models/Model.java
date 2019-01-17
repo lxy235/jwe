@@ -3,11 +3,11 @@ package com.myweb.models;
 import com.myweb.App;
 import com.myweb.Db;
 import com.myweb.drivers.DbDriver;
+import com.myweb.drivers.mysql.Field;
 import com.myweb.drivers.mysql.RowSet;
 import com.myweb.drivers.mysql.Statement;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -88,6 +88,17 @@ public class Model {
     }
 
     /**
+     * 获取指定条件的数据
+     *
+     * @param field
+     * @param statement
+     * @return
+     */
+    public ArrayList<HashMap<String, Object>> fetchAll(Field field, Statement statement) {
+        return dbDriver.fetchAll(field, getTableName(), statement);
+    }
+
+    /**
      * 获取单条记录
      *
      * @param fields
@@ -118,6 +129,17 @@ public class Model {
      */
     public HashMap<String, Object> fetchOne(String fields, Statement statement) {
         return dbDriver.fetchOne(fields, getTableName(), statement);
+    }
+
+    /**
+     * 获取单条记录
+     *
+     * @param field
+     * @param statement
+     * @return
+     */
+    public HashMap<String, Object> fetchOne(Field field, Statement statement) {
+        return dbDriver.fetchOne(field, getTableName(), statement);
     }
 
     /**

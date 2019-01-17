@@ -1,9 +1,9 @@
 package com.myweb.drivers;
 
+import com.myweb.drivers.mysql.Field;
 import com.myweb.drivers.mysql.RowSet;
 import com.myweb.drivers.mysql.Statement;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,11 +12,15 @@ public interface DbDriver {
 
     ArrayList<HashMap<String, Object>> fetchAll(String fields, String tableName, Statement statement);
 
+    ArrayList<HashMap<String, Object>> fetchAll(Field field, String tableName, Statement statement);
+
     HashMap<String, Object> fetchOne(String fields, String tableName, String primaryId, Integer id);
 
     HashMap<String, Object> fetchOne(String fields, String tableName, String where);
 
     HashMap<String, Object> fetchOne(String fields, String tableName, Statement statement);
+
+    HashMap<String, Object> fetchOne(Field field, String tableName, Statement statement);
 
     Boolean insert(String tableName, RowSet rowset);
 
