@@ -15,11 +15,4 @@ public class App {
         }
         return db;
     }
-
-    public static View getView() {
-        if (null == view) {
-            return new View();
-        }
-        return view;
-    }
 }
