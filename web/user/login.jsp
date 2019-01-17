@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" import="java.util.*" %>
 <html>
 <head>
-    <title>用户登录</title>
+    <title>用户登录<%=request.getAttribute("title")%>$title$</title>
 </head>
 <body>
     <form action="/login" method="post" enctype="application/x-www-form-urlencoded">

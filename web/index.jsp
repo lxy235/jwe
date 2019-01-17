@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  欢迎<%=request.getSession().getAttribute("username")%>登录信息管理系统
+  欢迎登录信息管理系统
   </body>
 </html>

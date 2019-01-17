@@ -1,4 +1,4 @@
-package com.myweb;
+package com.myweb.views;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class View {
+    protected String templateFileExtension = ".jsp";
     protected HttpServletRequest req = null;
     protected HttpServletResponse resq = null;
     public HashMap<String, Object> viewData = new HashMap<String, Object>();
@@ -26,6 +27,7 @@ public class View {
                     req.setAttribute(name, viewData.get(name));
                 }
             }
+            template = "/"+template+templateFileExtension;
             req.getRequestDispatcher(template).forward(req, resq);
         } catch (ServletException e) {
             e.printStackTrace();
@@ -40,6 +42,7 @@ public class View {
                     req.setAttribute(name, viewData.get(name));
                 }
             }
+            template = "/"+template+templateFileExtension;
             req.getRequestDispatcher(template).forward(req, resq);
         } catch (ServletException e) {
             e.printStackTrace();

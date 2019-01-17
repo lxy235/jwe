@@ -145,3 +145,14 @@ try {
     db.rollback(); //事务回滚
 }
 ```
+#使用视图
+```java
+//视图展示1
+view.assign("title", "Hello");
+view.render("user/login");
+
+//视图展示2
+HashMap<String, Object> viewData = new HashMap<String, Object>();
+viewData.put("title", "Hello");
+view.render("user/login", viewData);
+```

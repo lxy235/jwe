@@ -1,7 +1,7 @@
 package com.myweb.servlets;
 
 
-import com.myweb.View;
+import com.myweb.views.View;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
