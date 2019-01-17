@@ -148,7 +148,7 @@ public class Model {
      * @param rowset
      * @return
      */
-    public boolean insert(RowSet rowset) {
+    public Integer insert(RowSet rowset) {
         return dbDriver.insert(getTableName(), rowset);
     }
 
