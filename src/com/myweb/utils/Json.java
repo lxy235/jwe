@@ -6,7 +6,11 @@ public class Json {
     /**
      * json对象
      */
-    protected static Gson gson = new Gson();
+    protected static Gson gson = null;
+
+    static {
+        gson = new Gson();
+    }
 
     /**
      * json解码to对象

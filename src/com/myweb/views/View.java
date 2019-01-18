@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class View {
-    protected String templateFileExtension = ".jsp";
+    protected static String viewRootPath = "/views/";
+    protected static String templateFileExtension = ".jsp";
     protected HttpServletRequest req = null;
     protected HttpServletResponse resq = null;
     public HashMap<String, Object> viewData = new HashMap<String, Object>();
@@ -27,7 +28,7 @@ public class View {
                     req.setAttribute(name, viewData.get(name));
                 }
             }
-            template = "/"+template+templateFileExtension;
+            template = viewRootPath+template+templateFileExtension;
             req.getRequestDispatcher(template).forward(req, resq);
         } catch (ServletException e) {
             e.printStackTrace();
@@ -42,12 +43,15 @@ public class View {
                     req.setAttribute(name, viewData.get(name));
                 }
             }
-            template = "/"+template+templateFileExtension;
+            template = viewRootPath+template+templateFileExtension;
             req.getRequestDispatcher(template).forward(req, resq);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static String getViewPath() {
+        return viewRootPath;
     }
 }
