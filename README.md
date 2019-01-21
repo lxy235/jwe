@@ -28,7 +28,7 @@ System.out.println(userinfo);
 System.out.println(userinfo.isEmpty());
 
 #获取一条记录（对象方式，防sql注入，推荐）
-Statement statement = new Statement();
+Statement statement = user.getStatement();
 statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
@@ -38,12 +38,12 @@ System.out.println(userinfo.isEmpty());
 
 #获取一条记录（对象方式，防sql注入，推荐）
 #设置字段
-Field field = new Field();
+Field field = user.getField();
 String[] fields = {"id","name","age"};
 field.setField(fields);
 field.setField("sex");
 #设置查询条件
-Statement statement = new Statement();
+Statement statement = user.getStatement();
 statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
@@ -58,7 +58,7 @@ System.out.println(list);
 System.out.println(list.isEmpty());
 
 #获取全部记录（对象方式，防sql注入，推荐）
-Statement statement = new Statement();
+Statement statement = user.getStatement();
 statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
@@ -68,12 +68,12 @@ System.out.println(list.isEmpty());
 
 #获取全部记录（对象方式，防sql注入，推荐）
 #设置字段
-Field field = new Field();
+Field field = user.getField();
 String[] fields = {"id","name","age"};
 field.setField(fields);
 field.setField("sex");
 #设置查询条件
-Statement statement = new Statement();
+Statement statement = user.getStatement();
 statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
@@ -83,7 +83,7 @@ System.out.println(list.isEmpty());
 
 
 #插入数据
-RowSet insData = new RowSet();
+RowSet insData = user.getRowSet();
 insData.addString("name", "lxy");
 insData.addString("sex", "M");
 insData.addNumber("age", 35);
@@ -101,11 +101,11 @@ Integer id = 13705;
 Integer num = user.update(sets, id);
 
 #更新数据
-RowSet upData = new RowSet();
+RowSet upData = user.getRowSet();
 upData.addSet("uname", "123");
 upData.addSet("pwd", "234");
 //statement参数使用对象方式，防sql注入，推荐
-Statement statement = new Statement();
+Statement statement = user.getStatement();
 statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");
@@ -121,7 +121,7 @@ int id = 13705;
 Integer num = user.delete(id);
 
 #删除数据（Statement statement）
-Statement statement = new Statement();
+Statement statement = user.getStatement();
 statement.setWhere("id > ? and id < ?");
 statement.setParam(1, 13705);
 statement.setParam(2, "13709 or 1=1");

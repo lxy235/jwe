@@ -6,7 +6,7 @@
     <!--配置过滤器-->
     <filter>
         <filter-name>MyWebFilter</filter-name>
-        <filter-class>com.frame.filters.MyWebFilter</filter-class>
+        <filter-class>com.frame.filters.BackendFilter</filter-class>
         <init-param>
             <param-name>ignores</param-name>
             <param-value>/css,/editor,/images,/js,/src,/login</param-value>
@@ -18,7 +18,7 @@
     </filter-mapping>
     <!--配置监听器-->
     <listener>
-        <listener-class>com.frame.lisenters.MyWebListener</listener-class>
+        <listener-class>com.frame.lisenters.BackendListener</listener-class>
     </listener>
     <!--配置全局参数context-->
     <context-param>

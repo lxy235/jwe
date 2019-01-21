@@ -10,11 +10,11 @@ import javax.servlet.http.HttpSessionListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
 @WebListener()
-public class MyWebListener implements ServletContextListener,
+public class BackendListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
 
     // Public constructor is required by servlet spec
-    public MyWebListener() {
+    public BackendListener() {
     }
 
     // -------------------------------------------------------

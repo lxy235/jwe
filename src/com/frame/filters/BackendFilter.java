@@ -10,8 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
-@WebFilter(filterName = "MyWebFilter")
-public class MyWebFilter implements Filter {
+@WebFilter(filterName = "BackendFilter")
+public class BackendFilter implements Filter {
 
     private Set<String> prefixIignores = new HashSet<String>();
 
