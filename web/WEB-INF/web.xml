@@ -3,10 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!--配置过滤器-->
+    <filter>
+        <filter-name>MyWebFilter</filter-name>
+        <filter-class>com.myweb.servlets.filters.MyWebFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MyWebFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--配置监听器-->
+    <listener>
+        <listener-class>com.myweb.lisenters.MyWebListener</listener-class>
+    </listener>
+    <!--配置全局参数context-->
     <context-param>
         <param-name>pagesize</param-name>
         <param-value>20</param-value>
     </context-param>
+    <!--配置servlet-->
     <servlet>
         <servlet-name>UserLogin</servlet-name>
         <servlet-class>com.myweb.servlets.User.LoginServlet</servlet-class>
@@ -18,6 +33,7 @@
     <servlet>
         <servlet-name>Index</servlet-name>
         <servlet-class>com.myweb.servlets.IndexServlet</servlet-class>
+        <!--配置servlet参数，servlet内部使用-->
         <init-param>
             <param-name>charset</param-name>
             <param-value>utf-8</param-value>

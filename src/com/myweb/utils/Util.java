@@ -1,5 +1,6 @@
 package com.myweb.utils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 public class Util {
@@ -38,5 +39,24 @@ public class Util {
         jsondata.put("msg", msg);
         jsondata.put("data", data);
         return Json.encode(jsondata);
+    }
+
+    /**
+     * 获取客户端IP
+     * @param request
+     * @return
+     */
+    public static String getClientIP(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
     }
 }
