@@ -7,6 +7,10 @@
     <filter>
         <filter-name>MyWebFilter</filter-name>
         <filter-class>com.myweb.servlets.filters.MyWebFilter</filter-class>
+        <init-param>
+            <param-name>ignores</param-name>
+            <param-value>/css,/editor,/images,/js,/src,/login</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>MyWebFilter</filter-name>
