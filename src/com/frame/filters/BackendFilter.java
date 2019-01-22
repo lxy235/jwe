@@ -45,11 +45,14 @@ public class BackendFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
         String cp = config.getServletContext().getContextPath();
         String ignoresParam = config.getInitParameter("ignores");
-        String[] ignoreArray = ignoresParam.split(",");
-        for (String s : ignoreArray) {
-            prefixIignores.add(cp + s);
+        if(null!=ignoresParam) {
+            String[] ignoreArray = ignoresParam.split(",");
+            for (String s : ignoreArray) {
+                prefixIignores.add(cp + s);
+            }
         }
     }
+
     private boolean _canIgnore(HttpServletRequest request) {
         String url = request.getRequestURI();
         for (String ignore : prefixIignores) {
