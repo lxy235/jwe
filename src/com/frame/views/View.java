@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class View {
-    protected static String viewRootPath = "views/";
+    protected static String viewRootPath = "/backend/views/";
     protected static String templateFileExtension = ".jsp";
     protected HttpServletRequest req = null;
     protected HttpServletResponse resq = null;
