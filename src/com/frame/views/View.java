@@ -7,15 +7,27 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class View {
-    protected static String viewRootPath = "/backend/views/";
+    protected static String viewRootPath = "";
     protected static String templateFileExtension = ".jsp";
     protected HttpServletRequest req = null;
     protected HttpServletResponse resq = null;
     public HashMap<String, Object> viewData = new HashMap<String, Object>();
+
+    public static String getViewRootPath() {
+        return viewRootPath;
+    }
+
+    public static void setViewRootPath(String viewRootPath) {
+        View.viewRootPath = viewRootPath;
+    }
+
     public View(HttpServletRequest request, HttpServletResponse response) {
         req = request;
         resq = response;
+        String appName = req.getServletContext().getInitParameter("appName");
+        setViewRootPath("/"+appName+"/views/");
     }
+
     public void assign(String name, Object value) {
         if(null!=name && null!=value) {
             viewData.put(name, value);

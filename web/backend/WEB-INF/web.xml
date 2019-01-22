@@ -3,6 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!--配置应用名称-->
+    <context-param>
+        <param-name>appName</param-name>
+        <param-value>backend</param-value>
+    </context-param>
     <!--配置过滤器-->
     <filter>
         <filter-name>MyWebFilter</filter-name>
@@ -20,11 +25,6 @@
     <listener>
         <listener-class>com.frame.lisenters.BackendListener</listener-class>
     </listener>
-    <!--配置全局参数context-->
-    <context-param>
-        <param-name>pagesize</param-name>
-        <param-value>20</param-value>
-    </context-param>
     <!--配置servlet-->
     <servlet>
         <servlet-name>UserLogin</servlet-name>

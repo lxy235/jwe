@@ -11,9 +11,9 @@ To change this template use File | Settings | File Templates.
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>${title}</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <script language="JavaScript" src="js/jquery.js"></script>
-    <script src="js/cloud.js" type="text/javascript"></script>
+    <link href="backend/css/style.css" rel="stylesheet" type="text/css"/>
+    <script language="JavaScript" src="backend/js/jquery.js"></script>
+    <script src="backend/js/cloud.js" type="text/javascript"></script>
 
     <script language="javascript">
         $(function () {
@@ -26,7 +26,7 @@ To change this template use File | Settings | File Templates.
 
 </head>
 
-<body style="background-color:#df7611; background-image:url(images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+<body style="background-color:#df7611; background-image:url(backend/images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
 
 
 <div id="mainBody">
